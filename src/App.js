@@ -22,9 +22,10 @@ const useCountry = (name) => {
       .get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
       .then(response => {
         setCountry(response.data)
+      }).catch(error => {
+        setCountry("not found")
       })
   }, [name])
-  console.log(country)
   return country
 }
 
@@ -33,7 +34,7 @@ const Country = ({ country }) => {
     return null
   }
 
-  if (!country.found) {
+  if (country === "not found") {
     return (
       <div>
         not found...
